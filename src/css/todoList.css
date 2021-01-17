@@ -1,0 +1,118 @@
+.todoList__item {
+  display: flex;
+  padding: 8px;
+  border-radius: 3px;
+}
+
+.todoList__item:not(:first-child) {
+  margin-top: 8px;
+}
+
+/* 未完了 */
+.incompleteItem {
+  background: #FFF;
+}
+
+.incompleteItem__content {
+  width: 100%;
+  color: #333;
+}
+
+.incompleteItem__title {
+  font-weight: bold;
+}
+
+.incompleteItem__desc {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: solid 1px #DCDCDC;
+  font-size: 14px;
+}
+
+/* 完了済 */
+.doneItem__content {
+  width: 100%;
+  color: #FFF;
+}
+
+.doneItem__title {
+  font-weight: bold;
+}
+
+.doneItem__desc {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: solid 1px #DCDCDC;
+  font-size: 14px;
+}
+
+/* 編集中 */
+.editItem {
+  background: #E1E9F2;
+}
+
+.editItem__content {
+  width: 100%;
+  color: #333;
+}
+
+.editForm__textBox {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background: #FFF;
+  border-radius: 3px;
+  color: #333;
+}
+
+.editForm__textBox:not(:first-child) {
+  margin-top: 8px;
+}
+
+/* ボタン */
+.todoList__actionBtnList {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin-left: 16px;
+  list-style: none;
+}
+
+.todoList__actionBtnItem:not(:first-child) {
+  margin-left: 8px;
+}
+
+.actionBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: #FFF;
+}
+
+.actionBtn--done {
+  background: #67D5B5;
+}
+
+.actionBtn--edit {
+  background: #7f9eb2;
+}
+
+.actionBtn--return {
+  background: #8CD790;
+}
+
+.actionBtn--delete {
+  background: #e85a71;
+}
+
+.actionBtn--update {
+  background: #4ea1d3;
+}
+
+.actionBtn__icon {
+  width: 20px;
+  height: 20px;
+}

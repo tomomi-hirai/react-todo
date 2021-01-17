@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+.mainForm__label {
+  display: block;
+  color: #FFF;
+  font-size: 14px;
+}
+
+.mainForm__label:not(:first-child) {
+  margin-top: 16px;
+}
+
+.mainForm__textBox {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px;
+  background: #E1E9F2;
+  border-radius: 3px;
+  color: #333;
+}
+
+.mainForm__addBtn {
+  display: block;
+  min-width: 240px;
+  margin: 24px auto 0;
+  padding: 8px;
+  background: #FFE272;
+  border-radius: 30px;
+  color: #333;
+  font-weight: bold;
+}
