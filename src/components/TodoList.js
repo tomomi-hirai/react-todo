@@ -5,9 +5,16 @@ import '../css/todoList.css';
 
 class TodoList extends Component {
   render() {
+    const todoItems = this.props.todoItems.map(todoItem => 
+      <TodoItem
+        key={todoItem.id}
+        {...todoItem}
+      />
+    );
+
     return(
       <ul className="todoList">
-        <TodoItem />
+        {todoItems}
         <EditTodoItem />
       </ul>
     )
