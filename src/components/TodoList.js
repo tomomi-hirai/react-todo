@@ -10,6 +10,7 @@ class TodoList extends Component {
         key={todoItem.id}
         {...todoItem}
         setTodoStatus={this.props.setTodoStatus}
+        deleteTodoItem={this.props.deleteTodoItem}
       />
     );
 

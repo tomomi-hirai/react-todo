@@ -17,6 +17,7 @@ class App extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setTodoStatus = this.setTodoStatus.bind(this);
+    this.deleteTodoItem = this.deleteTodoItem.bind(this);
   }
 
   handleSubmit(e) {
@@ -47,6 +48,14 @@ class App extends Component {
     this.setState({ todoItems });
   }
 
+  deleteTodoItem(target) {
+    const todoItems = this.state.todoItems;
+    const index = todoItems.findIndex(todoItem => todoItem.id === target.id);
+    todoItems.splice(index, 1);
+
+    this.setState({ todoItems });
+  }
+
   render() {
     return (
       <div className="app">
@@ -60,6 +69,7 @@ class App extends Component {
           <TodoList
             todoItems={this.state.todoItems}
             setTodoStatus={this.setTodoStatus}
+            deleteTodoItem={this.deleteTodoItem}
           />
         </div>
       </div>
