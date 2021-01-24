@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 
 class TodoItem extends Component {
+  handleTodoStatus = () => {
+    this.props.setTodoStatus(this.props);
+  }
+
   render() {
-    const className = 'incompleteItem';
-    const btn1 = this.props.done ? 'done' : 'return';
-    const btn2 = this.props.done ? 'return' : 'delete';
+    const done = this.props.done;
+    const className = done ? 'doneItem': 'incompleteItem';
+    const btn1 = done ? 'return' : 'done';
+    const alt1 = done ? '元に戻す' : '完了';
+    const btn2 = done ? 'delete' : 'edit';
+    const alt2 = done ? '削除' : '編集';
 
     return(
       <li className={`todoList__item ${className}`} >
@@ -14,35 +21,17 @@ class TodoItem extends Component {
         </div>
         <ul className="todoList__actionBtnList">
           <li className="todoList__actionBtnItem">
-            <button className={`actionBtn actionBtn--${btn1}`} type="button">
-              <img className="actionBtn__icon" src={`img/icon_${btn1}.svg`} />
+            <button className={`actionBtn actionBtn--${btn1}`} type="button" onClick={this.handleTodoStatus}>
+              <img className="actionBtn__icon" src={`img/icon_${btn1}.svg`} alt={alt1} />
             </button>
           </li>
           <li className="todoList__actionBtnItem">
             <button className={`actionBtn actionBtn--${btn2}`} type="button">
-              <img className="actionBtn__icon" src={`img/icon_${btn2}.svg`} />
+              <img className="actionBtn__icon" src={`img/icon_${btn2}.svg`} alt={alt2} />
             </button>
           </li>
         </ul>
       </li>
-      /* <li className="todoList__item doneItem">
-        <div className="doneItem__content">
-          <span className="doneItem__title">タイトル</span>
-          <p className="doneItem__desc">ここにテキストが入ります。ここにテキストが入ります。</p>
-        </div>
-        <ul className="todoList__actionBtnList">
-          <li className="todoList__actionBtnItem">
-            <button className="actionBtn actionBtn--return" type="button">
-              <img className="actionBtn__icon" src="img/icon_return.svg" />
-            </button>
-          </li>
-          <li className="todoList__actionBtnItem">
-            <button className="actionBtn actionBtn--delete" type="button">
-              <img className="actionBtn__icon" src="img/icon_delete.svg"/>
-            </button>
-          </li>
-        </ul>
-      </li> */
     );
   }
 }

@@ -9,6 +9,7 @@ class TodoList extends Component {
       <TodoItem
         key={todoItem.id}
         {...todoItem}
+        setTodoStatus={this.props.setTodoStatus}
       />
     );
 
