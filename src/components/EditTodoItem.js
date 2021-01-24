@@ -5,10 +5,10 @@ class EditTodoItem extends Component {
     return(
       <li className="todoList__item editItem">
         <div className="editItem__content">
-          <from className="editForm">
+          <form className="editForm">
             <input className="editForm__textBox" type="text" name="title" value="タイトル" />
             <textarea className="editForm__textBox" name="desc">ここにテキストが入ります。</textarea>
-          </from>
+          </form>
         </div>
         <ul className="todoList__actionBtnList">
           <li className="todoList__actionBtnItem">

@@ -4,26 +4,37 @@ import TodoList from './TodoList';
 import '../css/ress.css';
 import '../css/app.css';
 
+let currentId = 0;
+
 class App extends Component {
   constructor(props) {
     super(props);
-    
+
+    const todoItems = [];
+
     this.state = {
-      todoItems: [
-        {
-          id: 1,
-          title: 'test title 1',
-          desc: 'test description 1 test description 1 test description 1',
-          done: false
-        },
-        {
-          id: 2,
-          title: 'test title 2',
-          desc: 'test description 2 test description 2 test description 2',
-          done: false
-        }
-      ]
+      todoItems: todoItems
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const target = e.target;
+
+    const newTodoItem = {
+      id: currentId,
+      title: target.title.value,
+      desc: target.desc.value,
+      done: false
+    };
+    const newTodoItems = [...this.state.todoItems, newTodoItem];
+    this.setState({ todoItems: newTodoItems });
+
+    currentId++;
+    target.title.value = '';
+    target.desc.value = '';
   }
 
   render() {
@@ -31,7 +42,9 @@ class App extends Component {
       <div className="app">
         <h1 className="heading">what I have to do</h1>
         <div className="app__mainFormWrapper">
-          <Form />
+          <Form
+            handleSubmit={this.handleSubmit}
+          />
         </div>
         <div className="app__todoWrapper">
           <TodoList
