@@ -18,6 +18,9 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setTodoStatus = this.setTodoStatus.bind(this);
     this.deleteTodoItem = this.deleteTodoItem.bind(this);
+    this.switchEditTodoItem = this.switchEditTodoItem.bind(this);
+    this.editTodoItem = this.editTodoItem.bind(this);
+    this.updateTodoItem = this.updateTodoItem.bind(this);
   }
 
   handleSubmit(e) {
@@ -29,7 +32,8 @@ class App extends Component {
       id: currentId,
       title: target.title.value,
       desc: target.desc.value,
-      done: false
+      done: false,
+      edit: false
     };
     const newTodoItems = [...this.state.todoItems, newTodoItem];
     this.setState({ todoItems: newTodoItems });
@@ -56,6 +60,42 @@ class App extends Component {
     this.setState({ todoItems });
   }
 
+  switchEditTodoItem(target) {
+    const todoItems = this.state.todoItems;
+    const newTodoItems = todoItems.map(todoItem => {
+      if(todoItem.id === target.id) {
+        return { ...todoItem, edit: true }
+      }
+      return todoItem;
+    });
+
+    this.setState({ todoItems: newTodoItems });
+  }
+
+  editTodoItem(e, target) {
+    const name = e.target.name;
+    const value = e.target.value;
+    const todoItems = this.state.todoItems;
+    const newTodoItems = todoItems.map(todoItem => {
+      if(todoItem.id === target.id) {
+        return { ...todoItem, [name]: value }
+      }
+      return todoItem;
+    })
+
+    this.setState({ todoItems: newTodoItems });
+  }
+
+  updateTodoItem(target) {
+    const todoItems = this.state.todoItems;
+    const newTodoItems = todoItems.map(todoItem => {
+      if(!todoItem.title) return todoItem;
+      if(todoItem.id === target.id) return { ...todoItem, edit: false };
+      return todoItem;
+    });
+    this.setState({ todoItems: newTodoItems });
+  }
+
   render() {
     return (
       <div className="app">
@@ -70,6 +110,9 @@ class App extends Component {
             todoItems={this.state.todoItems}
             setTodoStatus={this.setTodoStatus}
             deleteTodoItem={this.deleteTodoItem}
+            switchEditTodoItem={this.switchEditTodoItem}
+            editTodoItem={this.editTodoItem}
+            updateTodoItem={this.updateTodoItem}
           />
         </div>
       </div>

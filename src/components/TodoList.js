@@ -5,21 +5,34 @@ import '../css/todoList.css';
 
 class TodoList extends Component {
   render() {
-    const todoItems = this.props.todoItems.map(todoItem => 
-      <TodoItem
-        key={todoItem.id}
-        {...todoItem}
-        setTodoStatus={this.props.setTodoStatus}
-        deleteTodoItem={this.props.deleteTodoItem}
-      />
-    );
+    const todoItems = this.props.todoItems.map(todoItem => {
+      if(todoItem.edit) {
+        return (
+          <EditTodoItem 
+            key={todoItem.id}
+            {...todoItem}
+            editTodoItem={this.props.editTodoItem}
+            updateTodoItem={this.props.updateTodoItem}
+          />
+        );
+      } else {
+        return (
+          <TodoItem
+            key={todoItem.id}
+            {...todoItem}
+            setTodoStatus={this.props.setTodoStatus}
+            deleteTodoItem={this.props.deleteTodoItem}
+            switchEditTodoItem={this.props.switchEditTodoItem}
+          />
+        );
+      }
+    });
 
     return(
       <ul className="todoList">
         {todoItems}
-        <EditTodoItem />
       </ul>
-    )
+    );
   }
 }
 

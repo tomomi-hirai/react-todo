@@ -9,6 +9,10 @@ class TodoItem extends Component {
     this.props.deleteTodoItem(this.props);
   }
 
+  handleEdit = () => {
+    this.props.switchEditTodoItem(this.props);
+  }
+
   render() {
     const done = this.props.done;
     const className = done ? 'doneItem': 'incompleteItem';
@@ -16,7 +20,7 @@ class TodoItem extends Component {
     const alt1 = done ? '元に戻す' : '完了';
     const btn2 = done ? 'delete' : 'edit';
     const alt2 = done ? '削除' : '編集';
-    const onClick = done ? this.handleDelete : '';
+    const onClick = done ? this.handleDelete : this.handleEdit;
 
     return(
       <li className={`todoList__item ${className}`} >
