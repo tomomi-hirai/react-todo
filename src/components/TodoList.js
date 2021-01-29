@@ -11,8 +11,8 @@ class TodoList extends Component {
           <EditTodoItem 
             key={todoItem.id}
             {...todoItem}
-            editTodoItem={this.props.editTodoItem}
             updateTodoItem={this.props.updateTodoItem}
+            cancelEdit={this.props.cancelEdit}
           />
         );
       } else {

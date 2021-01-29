@@ -19,8 +19,8 @@ class App extends Component {
     this.setTodoStatus = this.setTodoStatus.bind(this);
     this.deleteTodoItem = this.deleteTodoItem.bind(this);
     this.switchEditTodoItem = this.switchEditTodoItem.bind(this);
-    this.editTodoItem = this.editTodoItem.bind(this);
     this.updateTodoItem = this.updateTodoItem.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
   }
 
   handleSubmit(e) {
@@ -72,27 +72,24 @@ class App extends Component {
     this.setState({ todoItems: newTodoItems });
   }
 
-  editTodoItem(e, target) {
-    const name = e.target.name;
-    const value = e.target.value;
-    const todoItems = this.state.todoItems;
-    const newTodoItems = todoItems.map(todoItem => {
-      if(todoItem.id === target.id) {
-        return { ...todoItem, [name]: value }
-      }
-      return todoItem;
-    })
-
-    this.setState({ todoItems: newTodoItems });
-  }
-
-  updateTodoItem(target) {
+  updateTodoItem(target, title, desc) {
     const todoItems = this.state.todoItems;
     const newTodoItems = todoItems.map(todoItem => {
       if(!todoItem.title) return todoItem;
-      if(todoItem.id === target.id) return { ...todoItem, edit: false };
+      if(todoItem.id === target.id) return { ...todoItem, title, desc, edit: false };
       return todoItem;
     });
+    this.setState({ todoItems: newTodoItems });
+  }
+
+  cancelEdit(target) {
+    const todoItems = this.state.todoItems;
+    const newTodoItems = todoItems.map(todoItem => {
+      if(todoItem.id === target.id) {
+        return { ...todoItem, edit: false }
+      }
+      return todoItem;
+    })
     this.setState({ todoItems: newTodoItems });
   }
 
@@ -111,8 +108,8 @@ class App extends Component {
             setTodoStatus={this.setTodoStatus}
             deleteTodoItem={this.deleteTodoItem}
             switchEditTodoItem={this.switchEditTodoItem}
-            editTodoItem={this.editTodoItem}
             updateTodoItem={this.updateTodoItem}
+            cancelEdit={this.cancelEdit}
           />
         </div>
       </div>
