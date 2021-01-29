@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 
 class TodoItem extends Component {
   handleTodoStatus = () => {
-    this.props.setTodoStatus(this.props);
+    this.props.switchTodoStatus(this.props.id);
   }
 
   handleDelete = () => {
-    this.props.deleteTodoItem(this.props);
+    this.props.deleteTodoItem(this.props.id);
   }
 
   handleEdit = () => {
-    this.props.switchEditTodoItem(this.props);
+    this.props.switchEditTodoItem(this.props.id);
   }
 
   render() {
-    const done = this.props.done;
+    const { done } = this.props;
     const className = done ? 'doneItem': 'incompleteItem';
     const btn1 = done ? 'return' : 'done';
     const alt1 = done ? '元に戻す' : '完了';

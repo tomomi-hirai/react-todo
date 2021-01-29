@@ -15,19 +15,12 @@ class App extends Component {
     this.state = {
       todoItems: todoItems
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.setTodoStatus = this.setTodoStatus.bind(this);
-    this.deleteTodoItem = this.deleteTodoItem.bind(this);
-    this.switchEditTodoItem = this.switchEditTodoItem.bind(this);
-    this.updateTodoItem = this.updateTodoItem.bind(this);
-    this.cancelEdit = this.cancelEdit.bind(this);
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const target = e.target;
-
     const newTodoItem = {
       id: currentId,
       title: target.title.value,
@@ -36,60 +29,58 @@ class App extends Component {
       edit: false
     };
     const newTodoItems = [...this.state.todoItems, newTodoItem];
-    this.setState({ todoItems: newTodoItems });
 
+    this.setState({ todoItems: newTodoItems });
     currentId++;
     target.title.value = '';
     target.desc.value = '';
   }
 
-  setTodoStatus(target) {
+  switchTodoStatus = (id) => {
     const todoItems = [...this.state.todoItems];
-    const index = todoItems.findIndex(todoItem => todoItem.id === target.id);
+    const index = todoItems.findIndex(todoItem => todoItem.id === id);
     const todoItem = todoItems[index]
     todoItem.done = !todoItem.done;
 
     this.setState({ todoItems });
   }
 
-  deleteTodoItem(target) {
+  deleteTodoItem = (id) => {
     const todoItems = this.state.todoItems;
-    const index = todoItems.findIndex(todoItem => todoItem.id === target.id);
+    const index = todoItems.findIndex(todoItem => todoItem.id === id);
     todoItems.splice(index, 1);
 
     this.setState({ todoItems });
   }
 
-  switchEditTodoItem(target) {
+  switchEditTodoItem = (id) => {
     const todoItems = this.state.todoItems;
     const newTodoItems = todoItems.map(todoItem => {
-      if(todoItem.id === target.id) {
-        return { ...todoItem, edit: true }
-      }
+      if(todoItem.id === id) return { ...todoItem, edit: true }
       return todoItem;
     });
 
     this.setState({ todoItems: newTodoItems });
   }
 
-  updateTodoItem(target, title, desc) {
+  updateTodoItem = (id, title, desc) => {
     const todoItems = this.state.todoItems;
     const newTodoItems = todoItems.map(todoItem => {
       if(!todoItem.title) return todoItem;
-      if(todoItem.id === target.id) return { ...todoItem, title, desc, edit: false };
+      if(todoItem.id === id) return { ...todoItem, title, desc, edit: false };
       return todoItem;
     });
+
     this.setState({ todoItems: newTodoItems });
   }
 
-  cancelEdit(target) {
+  cancelEdit = (id) => {
     const todoItems = this.state.todoItems;
     const newTodoItems = todoItems.map(todoItem => {
-      if(todoItem.id === target.id) {
-        return { ...todoItem, edit: false }
-      }
+      if(todoItem.id === id) return { ...todoItem, edit: false }
       return todoItem;
     })
+
     this.setState({ todoItems: newTodoItems });
   }
 
@@ -105,7 +96,7 @@ class App extends Component {
         <div className="app__todoWrapper">
           <TodoList
             todoItems={this.state.todoItems}
-            setTodoStatus={this.setTodoStatus}
+            switchTodoStatus={this.switchTodoStatus}
             deleteTodoItem={this.deleteTodoItem}
             switchEditTodoItem={this.switchEditTodoItem}
             updateTodoItem={this.updateTodoItem}

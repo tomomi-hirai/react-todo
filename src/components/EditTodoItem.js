@@ -24,15 +24,12 @@ class EditTodoItem extends Component {
   }
 
   handleUpdate = () => {
-    const editItem = this.state.editItem;
-    const title = editItem.title;
-    const desc = editItem.desc;
-
-    this.props.updateTodoItem(this.props, title, desc);
+    const { title, desc } = this.state.editItem;
+    this.props.updateTodoItem(this.props.id, title, desc);
   }
 
   handleCancel = () => {
-    this.props.cancelEdit(this.props);
+    this.props.cancelEdit(this.props.id);
   }
 
   render() {
