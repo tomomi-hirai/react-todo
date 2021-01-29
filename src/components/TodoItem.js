@@ -22,11 +22,19 @@ class TodoItem extends Component {
     const alt2 = done ? '削除' : '編集';
     const onClick = done ? this.handleDelete : this.handleEdit;
 
+    const desc = (
+      (this.props.desc) ? (
+        <p className={`${className}__desc`}>{this.props.desc}</p>
+      ) : (
+        false
+      )
+    );
+
     return(
       <li className={`todoList__item ${className}`} >
         <div className={`${className}__content`}>
-          <span className={`${className}__title`}>{this.props.title}</span>
-          <p className={`${className}__desc`}>{this.props.desc}</p>
+          <p className={`${className}__title`}>{this.props.title}</p>
+          {desc}
         </div>
         <ul className="todoList__actionBtnList">
           <li className="todoList__actionBtnItem">

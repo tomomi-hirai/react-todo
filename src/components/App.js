@@ -66,7 +66,7 @@ class App extends Component {
   updateTodoItem = (id, title, desc) => {
     const todoItems = this.state.todoItems;
     const newTodoItems = todoItems.map(todoItem => {
-      if(!todoItem.title) return todoItem;
+      if(!title) return todoItem;
       if(todoItem.id === id) return { ...todoItem, title, desc, edit: false };
       return todoItem;
     });
