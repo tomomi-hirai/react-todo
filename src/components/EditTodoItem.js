@@ -20,7 +20,8 @@ class EditTodoItem extends Component {
     const editItem = {...this.state.editItem};
     const newEditItem = {...editItem, [name]: value}
 
-    this.setState({ editItem: newEditItem })
+    this.setState({ editItem: newEditItem });
+    localStorage.setItem('editItems', JSON.stringify(newEditItem));
   }
 
   handleUpdate = () => {

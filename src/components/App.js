@@ -10,11 +10,16 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const todoItems = [];
+    const todoItems = JSON.parse(localStorage.getItem('todoItems')) || [];
 
     this.state = {
       todoItems: todoItems
     }
+  }
+
+  setTodoItems = (newTodoItems) => {
+    this.setState({ todoItems: newTodoItems });
+    localStorage.setItem('todoItems', JSON.stringify(newTodoItems));
   }
 
   handleSubmit = (e) => {
@@ -30,7 +35,7 @@ class App extends Component {
     };
     const newTodoItems = [...this.state.todoItems, newTodoItem];
 
-    this.setState({ todoItems: newTodoItems });
+    this.setTodoItems(newTodoItems);
     currentId++;
     target.title.value = '';
     target.desc.value = '';
@@ -42,7 +47,7 @@ class App extends Component {
     const todoItem = todoItems[index]
     todoItem.done = !todoItem.done;
 
-    this.setState({ todoItems });
+    this.setTodoItems(todoItems);
   }
 
   deleteTodoItem = (id) => {
@@ -50,7 +55,7 @@ class App extends Component {
     const index = todoItems.findIndex(todoItem => todoItem.id === id);
     todoItems.splice(index, 1);
 
-    this.setState({ todoItems });
+    this.setTodoItems(todoItems);
   }
 
   switchEditTodoItem = (id) => {
@@ -60,7 +65,7 @@ class App extends Component {
       return todoItem;
     });
 
-    this.setState({ todoItems: newTodoItems });
+    this.setTodoItems(newTodoItems);
   }
 
   updateTodoItem = (id, title, desc) => {
@@ -71,7 +76,7 @@ class App extends Component {
       return todoItem;
     });
 
-    this.setState({ todoItems: newTodoItems });
+    this.setTodoItems(newTodoItems);
   }
 
   cancelEdit = (id) => {
@@ -81,7 +86,7 @@ class App extends Component {
       return todoItem;
     })
 
-    this.setState({ todoItems: newTodoItems });
+    this.setTodoItems(newTodoItems);
   }
 
   render() {
