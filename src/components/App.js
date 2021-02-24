@@ -4,7 +4,17 @@ import TodoList from './TodoList';
 import '../css/ress.css';
 import '../css/app.css';
 
-let currentId = 0;
+let currentId;
+const storageItem = JSON.parse(localStorage.getItem('todoItems'));
+if(storageItem) {
+  if(storageItem.length) {
+    currentId = storageItem.slice(-1)[0].id + 1;
+  } else {
+    currentId = 0;
+  }
+} else {
+  currentId = 0;
+}
 
 class App extends Component {
   constructor(props) {
